@@ -2,10 +2,33 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Title>JdeJabali.JXLDataTableExtractor</Title>
+    <Authors>JdeJabali</Authors>
+    <Description>Extract data as tables from Excel. Search columns by their header or index number. Sets conditions for extracting the rows.</Description>
+    <PackageIcon>favpng_wild-boar-icon.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/JdeJabali/JXLDataTableExtractor</RepositoryUrl>
+    <PackageTags>Excel; Data; Extractor; Extraction; Table; Tables; J de Jabali;</PackageTags>
+    <Company>J de Jabali</Company>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="EPPlusFree" Version="4.5.3.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="favpng_wild-boar-icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
