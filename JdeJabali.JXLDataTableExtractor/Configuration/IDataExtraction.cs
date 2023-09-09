@@ -1,6 +1,7 @@
 ﻿using JdeJabali.JXLDataTableExtractor.JXLExtractedData;
 using System.Collections.Generic;
 using System.Data;
+using System;
 
 namespace JdeJabali.JXLDataTableExtractor.Configuration
 {
