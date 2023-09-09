@@ -1,4 +1,5 @@
 ﻿using JdeJabali.JXLDataTableExtractor.Exceptions;
+using System;
 
 namespace JdeJabali.JXLDataTableExtractor.Configuration
 {
@@ -10,6 +11,7 @@ namespace JdeJabali.JXLDataTableExtractor.Configuration
         /// <param name="workbook"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentException"/>
+        /// <exception cref="DuplicateWorkbookException"/>
         IDataTableExtractorWorkbookConfiguration Workbook(string workbook);
 
         /// <summary>
@@ -17,7 +19,7 @@ namespace JdeJabali.JXLDataTableExtractor.Configuration
         /// </summary>
         /// <param name="workbooks"></param>
         /// <returns></returns>
-        /// <exception cref="ArgumentException"/>
+        /// <exception cref="ArgumentException"/>        
         /// <exception cref="DuplicateWorkbookException"/>
         IDataTableExtractorWorkbookConfiguration Workbooks(string[] workbooks);
     }

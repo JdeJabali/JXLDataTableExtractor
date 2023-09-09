@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33717.318
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JdeJabali.JXLDataTableExtractor", "JdeJabali.JXLDataTableExtractor\JdeJabali.JXLDataTableExtractor.csproj", "{CD36465A-31AB-46E3-A124-EF55388CFAA9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JdeJabali.JXLDataTableExtractor", "JdeJabali.JXLDataTableExtractor\JdeJabali.JXLDataTableExtractor.csproj", "{CD36465A-31AB-46E3-A124-EF55388CFAA9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JdeJabali.JXLDataTableExtractor.Tests", "JdeJabali.JXLDataTableExtractor.Tests\JdeJabali.JXLDataTableExtractor.Tests.csproj", "{FA6E2047-E749-4159-BB10-674AC39E5C61}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{CD36465A-31AB-46E3-A124-EF55388CFAA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD36465A-31AB-46E3-A124-EF55388CFAA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD36465A-31AB-46E3-A124-EF55388CFAA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA6E2047-E749-4159-BB10-674AC39E5C61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA6E2047-E749-4159-BB10-674AC39E5C61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA6E2047-E749-4159-BB10-674AC39E5C61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA6E2047-E749-4159-BB10-674AC39E5C61}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,5 +1,4 @@
 ﻿using OfficeOpenXml;
-using System;
 using System.IO;
 using System.Linq;
 
@@ -24,30 +23,20 @@ internal static class DataReaderHelpers
             useAsync: false);
     }
 
-    public static ExcelWorksheet GetWorksheetByIndex(int index, string workbook, ExcelPackage excel)
+    public static ExcelWorksheet GetWorksheetByIndex(int index, ExcelPackage excel)
     {
         ExcelWorksheet worksheet = excel.Workbook.Worksheets
             .AsEnumerable()
             .FirstOrDefault(ws => ws.Index == index);
 
-        if (worksheet is null)
-        {
-            throw new IndexOutOfRangeException($@"Worksheet index not found: ""{index}"" in ""{workbook}"".");
-        }
-
         return worksheet;
     }
 
-    public static ExcelWorksheet GetWorksheetByName(string worksheetName, string workbook, ExcelPackage excel)
+    public static ExcelWorksheet GetWorksheetByName(string worksheetName, ExcelPackage excel)
     {
         ExcelWorksheet worksheet = excel.Workbook.Worksheets
             .AsEnumerable()
             .FirstOrDefault(ws => ws.Name == worksheetName);
-
-        if (worksheet is null)
-        {
-            throw new IndexOutOfRangeException($@"Worksheet name not found: ""{worksheetName}"" in ""{workbook}"".");
-        }
 
         return worksheet;
     }

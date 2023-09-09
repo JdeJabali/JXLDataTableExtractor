@@ -10,11 +10,11 @@ namespace JdeJabali.JXLDataTableExtractor.DataExtraction
 {
     internal class DataReader
     {
-        public List<string> Workbooks { get; set; } = new List<string>();
+        public HashSet<string> Workbooks { get; set; } = new HashSet<string>();
         public int SearchLimitRow { get; set; }
         public int SearchLimitColumn { get; set; }
-        public List<int> WorksheetIndexes { get; set; } = new List<int>();
-        public List<string> Worksheets { get; set; } = new List<string>();
+        public HashSet<int> WorksheetIndexes { get; set; } = new HashSet<int>();
+        public HashSet<string> Worksheets { get; set; } = new HashSet<string>();
         public bool ReadAllWorksheets { get; set; }
         public List<HeaderToSearch> HeadersToSearch { get; set; } = new List<HeaderToSearch>();
 
@@ -126,29 +126,37 @@ namespace JdeJabali.JXLDataTableExtractor.DataExtraction
                 return GetAllWorksheetsData;
             }
 
-            if (WorksheetIndexes.Count > 0)
-            {
-                return GetWorksheetsDataByIndex;
-            }
-
-            if (Worksheets.Count > 0)
-            {
-                return GetWorksheetsDataByName;
-            }
-
-            return null;
+            return GetWorksheetsByNameOrIndex;
         }
 
-        private List<JXLWorksheetData> GetWorksheetsDataByName(string workbook, ExcelPackage excel)
+        /// <summary>
+        /// It will not throw an exception if two worksheets match by index.
+        /// Only the first will be read, and the second will be ignored.
+        /// </summary>
+        /// <param name="workbook"></param>
+        /// <param name="excel"></param>
+        /// <returns></returns>
+        /// <exception cref="InvalidOperationException"></exception>
+        private List<JXLWorksheetData> GetWorksheetsByNameOrIndex(string workbook, ExcelPackage excel)
         {
             List<JXLWorksheetData> worksheetsData = new List<JXLWorksheetData>();
             JXLWorksheetData worksheetData;
+
+            List<int> worksheetsIndexes = new List<int>();
 
             foreach (string worksheetName in Worksheets)
             {
                 try
                 {
-                    ExcelWorksheet sheet = DataReaderHelpers.GetWorksheetByName(worksheetName, workbook, excel);
+                    ExcelWorksheet sheet = DataReaderHelpers.GetWorksheetByName(worksheetName, excel);
+
+                    if (sheet is null)
+                    {
+                        throw new IndexOutOfRangeException($@"Worksheet name not found: ""{worksheetName}"" in workbook: ""{workbook}"".");
+                    }
+
+                    worksheetsIndexes.Add(sheet.Index);
+
                     worksheetData = ExtractRows(sheet);
                     worksheetData.WorksheetName = sheet.Name;
                 }
@@ -164,19 +172,18 @@ namespace JdeJabali.JXLDataTableExtractor.DataExtraction
                 }
             }
 
-            return worksheetsData;
-        }
-
-        private List<JXLWorksheetData> GetWorksheetsDataByIndex(string workbook, ExcelPackage excel)
-        {
-            List<JXLWorksheetData> worksheetsData = new List<JXLWorksheetData>();
-            JXLWorksheetData worksheetData;
-
             foreach (int worksheetIndex in WorksheetIndexes)
             {
                 try
                 {
-                    ExcelWorksheet sheet = DataReaderHelpers.GetWorksheetByIndex(worksheetIndex, workbook, excel);
+                    ExcelWorksheet sheet = DataReaderHelpers.GetWorksheetByIndex(worksheetIndex, excel);
+
+                    if (sheet is null)
+                    {
+                        throw new IndexOutOfRangeException($@"Worksheet index not found: ""{worksheetIndex}"" " +
+                            $@"in workbook: ""{workbook}"".");
+                    }
+
                     worksheetData = ExtractRows(sheet);
                     worksheetData.WorksheetName = sheet.Name;
                 }

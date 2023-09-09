@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JdeJabali.JXLDataTableExtractor.Exceptions;
+using System;
 
 namespace JdeJabali.JXLDataTableExtractor.Configuration
 {

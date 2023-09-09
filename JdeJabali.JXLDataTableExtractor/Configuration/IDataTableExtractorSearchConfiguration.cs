@@ -1,17 +1,24 @@
-﻿namespace JdeJabali.JXLDataTableExtractor.Configuration
+﻿using JdeJabali.JXLDataTableExtractor.Exceptions;
+using System;
+
+namespace JdeJabali.JXLDataTableExtractor.Configuration
 {
     public interface IDataTableExtractorSearchConfiguration
     {
         /// <exception cref="ArgumentException"/>
+        /// <exception cref="DuplicateWorksheetException"/>
         IDataTableExtractorSearchConfiguration Worksheet(int worksheetIndex);
 
         /// <exception cref="ArgumentException"/>
+        /// <exception cref="DuplicateWorksheetException"/>
         IDataTableExtractorSearchConfiguration Worksheets(int[] worksheetIndexes);
 
         /// <exception cref="ArgumentException"/>
+        /// <exception cref="DuplicateWorksheetException"/>
         IDataTableExtractorSearchConfiguration Worksheet(string worksheet);
 
         /// <exception cref="ArgumentException"/>
+        /// <exception cref="DuplicateWorksheetException"/>
         IDataTableExtractorSearchConfiguration Worksheets(string[] worksheets);
 
         /// <summary>

@@ -19,9 +19,9 @@ namespace JdeJabali.JXLDataTableExtractor
         private int _searchLimitRow;
         private int _searchLimitColumn;
 
-        private readonly List<string> _workbooks = new List<string>();
-        private readonly List<int> _worksheetIndexes = new List<int>();
-        private readonly List<string> _worksheets = new List<string>();
+        private readonly HashSet<string> _workbooks = new HashSet<string>();
+        private readonly HashSet<int> _worksheetIndexes = new HashSet<int>();
+        private readonly HashSet<string> _worksheets = new HashSet<string>();
 
         private readonly List<HeaderToSearch> _headersToSearch = new List<HeaderToSearch>();
         private HeaderToSearch _headerToSearch;
@@ -44,9 +44,11 @@ namespace JdeJabali.JXLDataTableExtractor
                 throw new ArgumentException($"{nameof(workbook)} cannot be null or empty.");
             }
 
-            // You can't add more than one workbook anyway, so there is no need to check for duplicates.
-            // This would imply that there is a configuration for each workbook.
-            _workbooks.Add(workbook);
+            if (!_workbooks.Add(workbook))
+            {
+                throw new DuplicateWorkbookException("Cannot search for more than one workbook with the same name: " +
+                    $@"""{workbook}"".");
+            }
 
             return this;
         }
@@ -60,13 +62,7 @@ namespace JdeJabali.JXLDataTableExtractor
 
             foreach (string workbook in workbooks)
             {
-                if (_workbooks.Contains(workbook))
-                {
-                    throw new DuplicateWorkbookException("Cannot search for more than one workbook with the same name: " +
-                        $@"""{workbook}"".");
-                }
-
-                _workbooks.Add(workbook);
+                Workbook(workbook);
             }
 
             return this;
@@ -87,13 +83,11 @@ namespace JdeJabali.JXLDataTableExtractor
                 throw new ArgumentException($"{nameof(worksheetIndex)} cannot be less than zero.");
             }
 
-            if (_worksheetIndexes.Contains(worksheetIndex))
+            if (!_worksheetIndexes.Add(worksheetIndex))
             {
-                throw new ArgumentException("Cannot search for more than one worksheet with the same name: " +
-                    $@"""{worksheetIndex}"".");
+                throw new DuplicateWorksheetException("Cannot search for more than " +
+                    $@"one worksheet with the same index: ""{worksheetIndex}"".");
             }
-
-            _worksheetIndexes.Add(worksheetIndex);
 
             return this;
         }
@@ -105,7 +99,10 @@ namespace JdeJabali.JXLDataTableExtractor
                 throw new ArgumentException($"{nameof(worksheetIndexes)} cannot be null or empty.");
             }
 
-            _worksheetIndexes.AddRange(worksheetIndexes);
+            foreach (int worksheet in worksheetIndexes)
+            {
+                Worksheet(worksheet);
+            }
 
             return this;
         }
@@ -117,13 +114,11 @@ namespace JdeJabali.JXLDataTableExtractor
                 throw new ArgumentException($"{nameof(worksheet)} cannot be null or empty.");
             }
 
-            if (_worksheets.Contains(worksheet))
+            if (!_worksheets.Add(worksheet))
             {
-                throw new ArgumentException("Cannot search for more than one worksheet with the same name: " +
-                    $@"""{worksheet}"".");
+                throw new DuplicateWorksheetException("Cannot search for more than " +
+                    $@"one worksheet with the same name: ""{worksheet}"".");
             }
-
-            _worksheets.Add(worksheet);
 
             return this;
         }
@@ -135,7 +130,10 @@ namespace JdeJabali.JXLDataTableExtractor
                 throw new ArgumentException($"{nameof(worksheets)} cannot be null or empty.");
             }
 
-            _worksheets.AddRange(worksheets);
+            foreach (string worksheet in worksheets)
+            {
+                Worksheet(worksheet);
+            }
 
             return this;
         }
