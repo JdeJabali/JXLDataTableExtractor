@@ -1,34 +1,43 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <Title>JdeJabali.JXLDataTableExtractor</Title>
-    <Authors>JdeJabali</Authors>
-    <Description>Extract data as tables from Excel. Search columns by their header or index number. Sets conditions for extracting the rows.</Description>
-    <PackageIcon>favpng_wild-boar-icon.png</PackageIcon>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
-    <RepositoryUrl>https://github.com/JdeJabali/JXLDataTableExtractor</RepositoryUrl>
-    <PackageTags>Excel; Data; Extractor; Extraction; Table; Tables; J de Jabali;</PackageTags>
-    <Company>J de Jabali</Company>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<Title>JdeJabali.JXLDataTableExtractor</Title>
+		<Authors>JdeJabali</Authors>
+		<Description>- Extract data as tables or rows from Excel.
+- Search columns by their header or index number.
+- Sets conditions for extracting the rows.
+- Read one or many workbooks.
+- Select what worksheets should be read, by index number or name.
+- Get the result in a DataTable or in a collection of rows.</Description>
+		<PackageIcon>favpng_wild-boar-icon.png</PackageIcon>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<RepositoryUrl>https://github.com/JdeJabali/JXLDataTableExtractor</RepositoryUrl>
+		<PackageTags>Excel; Data; Extractor; Row; Column; Condition; Worksheet; Workbook; Extraction; Table; Tables; J de Jabali;</PackageTags>
+		<Company>J de Jabali</Company>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageReleaseNotes>Now by indicating the worksheets and columns it is clearer what type of base to use.</PackageReleaseNotes>
+		<AssemblyVersion>1.0.1.0</AssemblyVersion>
+		<FileVersion>$(AssemblyVersion)</FileVersion>
+		<Version>$(AssemblyVersion)</Version>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <None Include="..\README.md">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="EPPlusFree" Version="4.5.3.8" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="EPPlusFree" Version="4.5.3.8" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Update="favpng_wild-boar-icon.png">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<None Update="favpng_wild-boar-icon.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
 
 </Project>
