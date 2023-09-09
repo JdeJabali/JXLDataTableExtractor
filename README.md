@@ -1,6 +1,7 @@
 
 # JdeJabali.JXLDataTableExtractor
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
+![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/JdeJabali/JXLDataTableExtractor/dotnet.yml)
 ![Nuget](https://img.shields.io/nuget/dt/JdeJabali.JXLDataTableExtractor)
 
 - Extract data as tables or rows from Excel.
@@ -23,7 +24,7 @@ DataTable dataTable = DataTableExtractor
     .Configure()
     .Workbooks(workbooks)
     .SearchLimits(searchLimitRow: 10, searchLimitColumn: 30)
-    .Worksheet(worksheetIndex: 0) // Worksheet indexes in Excel are base 0
+    .Worksheet(worksheetIndex: 0) // Worksheet indexes in Excel are 0-based.
     .ReadOnlyTheIndicatedSheets()
     .ColumnHeader("Description")
     .ColumnHeader("Sales Value")
@@ -32,7 +33,7 @@ DataTable dataTable = DataTableExtractor
     .ColumnHeader("VAT")
         .ConditionToExtractRow(ConditionalsToExtractRow.HasNumericValueAboveZero)
         
-    .ColumnIndex(columnIndex: 7) // Column indexes in Excel are base 1
+    .ColumnIndex(columnIndex: 7) // Column indexes in Excel are 1-based.
 
     .CustomColumnHeaderMatch(cellValue => cellValue.Contains("Total"))
         .ConditionToExtractRow(cellValue => !string.IsNullOrEmpty(cellValue))
@@ -43,21 +44,27 @@ DataTable dataTable = DataTableExtractor
 
 ## Documentation
 
-"Search Limits" apply to all the worksheets to read.
+This line
 
-Instead of 
+```csharp
+.SearchLimits(searchLimitRow: 10, searchLimitColumn: 30)
+```
+
+applies to all the worksheets to read.
+
+---
+
+To read each worksheet in each workbook, simply change this line
 
 ```csharp
 .ReadOnlyTheIndicatedSheets()
 ```
 
-use
+to this
 
 ```csharp
 .ReadAllWorksheets()
 ```
-
-to read every worksheet in every workbook.
 
 ---
 
