@@ -34,7 +34,7 @@ namespace JdeJabali.JXLDataTableExtractor.DataExtraction
                 }
                 else
                 {
-                    dataTable.Columns.Add("Column " + headerCoord.HeaderCoord.Column.ToString() + ":");
+                    dataTable.Columns.Add("Column " + headerCoord.ColumnIndex.ToString() + ":");
                 }
             }
 
@@ -273,7 +273,8 @@ namespace JdeJabali.JXLDataTableExtractor.DataExtraction
                 };
             }
 
-            for (int row = firstColumnWithHeader.Value.Row + 1; row <= sheet.Dimension.Rows; row++)
+            // sheet.Dimension? Because might be empty
+            for (int row = firstColumnWithHeader.Value.Row + 1; row <= sheet.Dimension?.Rows; row++)
             {
                 JXLExtractedRow extractedRow = GetRow(row, sheet, out bool canAddRow);
 
