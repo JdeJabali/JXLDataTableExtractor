@@ -15,7 +15,9 @@ namespace JdeJabali.JXLDataTableExtractor.Configuration
         IDataTableExtractorWorksheetConfiguration ColumnHeader(string columnHeader);
 
         /// <summary>
-        /// The column index to search inside the worksheet(s). All the column indexes by default have 
+        /// The column index to search inside the worksheet(s). 
+        /// Column indexes in Excel are 1-based.
+        /// All the column indexes by default have 
         /// the starting row to one.
         /// </summary>
         /// <param name="columnIndex"></param>

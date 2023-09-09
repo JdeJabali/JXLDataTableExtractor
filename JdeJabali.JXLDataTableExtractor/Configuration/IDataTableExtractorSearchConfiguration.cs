@@ -5,10 +5,16 @@ namespace JdeJabali.JXLDataTableExtractor.Configuration
 {
     public interface IDataTableExtractorSearchConfiguration
     {
+        /// <summary>
+        /// Worksheet indexes in Excel are 0-based.
+        /// </summary>
         /// <exception cref="ArgumentException"/>
         /// <exception cref="DuplicateWorksheetException"/>
         IDataTableExtractorSearchConfiguration Worksheet(int worksheetIndex);
 
+        /// <summary>
+        /// Worksheet indexes in Excel are 0-based.
+        /// </summary>
         /// <exception cref="ArgumentException"/>
         /// <exception cref="DuplicateWorksheetException"/>
         IDataTableExtractorSearchConfiguration Worksheets(int[] worksheetIndexes);
