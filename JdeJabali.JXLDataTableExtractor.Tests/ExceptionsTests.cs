@@ -1,10 +1,9 @@
-using FluentAssertions;
+﻿using FluentAssertions;
 using JdeJabali.JXLDataTableExtractor.Exceptions;
-using OfficeOpenXml.FormulaParsing.Excel.Functions.Math;
 
 namespace JdeJabali.JXLDataTableExtractor.Tests;
 
-public class DataTableExtractorTests
+public class ExceptionsTests
 {
     [Fact]
     public void AddingDuplicateWorkbooks_Return_DuplicateWorkbookException()
@@ -14,6 +13,30 @@ public class DataTableExtractorTests
         Action act = () => DataTableExtractor.Configure().Workbooks(books);
 
         act.Should().Throw<DuplicateWorkbookException>();
+    }
+
+    [Fact]
+    public void AddingWorksheetByIndexLessThanZero_Return_ArgumentException()
+    {
+        string[] worksheets = { "sheet1", "sheet1" };
+
+        Action act = () =>
+            DataTableExtractor.Configure().Workbook("1.xls").SearchLimits(1, 20)
+        .Worksheet(int.MinValue);
+
+        act.Should().Throw<ArgumentException>();
+    }
+
+    [Fact]
+    public void AddingWorksheetByEmptyName_Return_ArgumentException()
+    {
+        string[] worksheets = { "sheet1", "sheet1" };
+
+        Action act = () =>
+            DataTableExtractor.Configure().Workbook("1.xls").SearchLimits(1, 20)
+        .Worksheet(string.Empty);
+
+        act.Should().Throw<ArgumentException>();
     }
 
     [Fact]
@@ -81,5 +104,4 @@ public class DataTableExtractorTests
 
         act.Should().Throw<DuplicateColumnException>();
     }
-
 }
