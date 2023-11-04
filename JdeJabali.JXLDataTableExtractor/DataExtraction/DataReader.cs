@@ -95,24 +95,27 @@ namespace JdeJabali.JXLDataTableExtractor.DataExtraction
 
             foreach (string workbook in Workbooks)
             {
-                using (ExcelPackage excel = new ExcelPackage(DataReaderHelpers.GetFileStream(workbook)))
+                using (FileStream workbookFileStream = DataReaderHelpers.GetFileStream(workbook))
                 {
-                    JXLWorkbookData workbookData = new JXLWorkbookData();
-                    workbookData.WorkbookPath = workbook;
-                    workbookData.WorkbookName = Path.GetFileNameWithoutExtension(workbook);
-
-                    List<JXLWorksheetData> worksheetsData = new List<JXLWorksheetData>();
-
-                    Func<string, ExcelPackage, List<JXLWorksheetData>> getWorksheetsData =
-                        ResolveGettingWorksheetsMethod();
-
-                    if (getWorksheetsData != null)
+                    using (ExcelPackage excel = new ExcelPackage(workbookFileStream))
                     {
-                        worksheetsData = getWorksheetsData(workbook, excel);
-                    }
+                        JXLWorkbookData workbookData = new JXLWorkbookData();
+                        workbookData.WorkbookPath = workbook;
+                        workbookData.WorkbookName = Path.GetFileNameWithoutExtension(workbook);
 
-                    workbookData.WorksheetsData.AddRange(worksheetsData);
-                    workbooksData.Add(workbookData);
+                        List<JXLWorksheetData> worksheetsData = new List<JXLWorksheetData>();
+
+                        Func<string, ExcelPackage, List<JXLWorksheetData>> getWorksheetsData =
+                            ResolveGettingWorksheetsMethod();
+
+                        if (getWorksheetsData != null)
+                        {
+                            worksheetsData = getWorksheetsData(workbook, excel);
+                        }
+
+                        workbookData.WorksheetsData.AddRange(worksheetsData);
+                        workbooksData.Add(workbookData);
+                    }
                 }
             }
 
