@@ -1,5 +1,6 @@
 ﻿using JdeJabali.JXLDataTableExtractor.Exceptions;
 using System;
+using System.Collections.Generic;
 
 namespace JdeJabali.JXLDataTableExtractor.Configuration
 {
@@ -17,7 +18,7 @@ namespace JdeJabali.JXLDataTableExtractor.Configuration
         /// </summary>
         /// <exception cref="ArgumentException"/>
         /// <exception cref="DuplicateWorksheetException"/>
-        IDataTableExtractorSearchConfiguration Worksheets(int[] worksheetIndexes);
+        IDataTableExtractorSearchConfiguration Worksheets(IEnumerable<int> worksheetIndexes);
 
         /// <exception cref="ArgumentException"/>
         /// <exception cref="DuplicateWorksheetException"/>
@@ -25,7 +26,7 @@ namespace JdeJabali.JXLDataTableExtractor.Configuration
 
         /// <exception cref="ArgumentException"/>
         /// <exception cref="DuplicateWorksheetException"/>
-        IDataTableExtractorSearchConfiguration Worksheets(string[] worksheets);
+        IDataTableExtractorSearchConfiguration Worksheets(IEnumerable<string> worksheets);
 
         /// <summary>
         /// Read all the worksheets in the workbook(s) specified.

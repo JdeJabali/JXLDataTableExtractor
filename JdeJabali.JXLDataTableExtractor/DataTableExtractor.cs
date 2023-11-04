@@ -92,7 +92,7 @@ namespace JdeJabali.JXLDataTableExtractor
             return this;
         }
 
-        public IDataTableExtractorSearchConfiguration Worksheets(int[] worksheetIndexes)
+        public IDataTableExtractorSearchConfiguration Worksheets(IEnumerable<int> worksheetIndexes)
         {
             if (worksheetIndexes is null)
             {
@@ -123,7 +123,7 @@ namespace JdeJabali.JXLDataTableExtractor
             return this;
         }
 
-        public IDataTableExtractorSearchConfiguration Worksheets(string[] worksheets)
+        public IDataTableExtractorSearchConfiguration Worksheets(IEnumerable<string> worksheets)
         {
             if (worksheets is null)
             {
@@ -239,39 +239,28 @@ namespace JdeJabali.JXLDataTableExtractor
 
         public List<JXLWorkbookData> GetWorkbooksData()
         {
-            _reader = new DataReader()
-            {
-                Workbooks = _workbooks,
-                SearchLimitRow = _searchLimitRow,
-                SearchLimitColumn = _searchLimitColumn,
-                WorksheetIndexes = _worksheetIndexes,
-                Worksheets = _worksheets,
-                ReadAllWorksheets = _readAllWorksheets,
-                HeadersToSearch = _headersToSearch,
-            };
+            _reader = GetDataReader();
 
             return _reader.GetWorkbooksData();
         }
 
         public List<JXLExtractedRow> GetExtractedRows()
         {
-            _reader = new DataReader()
-            {
-                Workbooks = _workbooks,
-                SearchLimitRow = _searchLimitRow,
-                SearchLimitColumn = _searchLimitColumn,
-                WorksheetIndexes = _worksheetIndexes,
-                Worksheets = _worksheets,
-                ReadAllWorksheets = _readAllWorksheets,
-                HeadersToSearch = _headersToSearch,
-            };
+            _reader = GetDataReader();
 
             return _reader.GetJXLExtractedRows();
         }
 
         public DataTable GetDataTable()
         {
-            _reader = new DataReader()
+            _reader = GetDataReader();
+
+            return _reader.GetDataTable();
+        }
+
+        private DataReader GetDataReader()
+        {
+            return new DataReader()
             {
                 Workbooks = _workbooks,
                 SearchLimitRow = _searchLimitRow,
@@ -281,8 +270,6 @@ namespace JdeJabali.JXLDataTableExtractor
                 ReadAllWorksheets = _readAllWorksheets,
                 HeadersToSearch = _headersToSearch,
             };
-
-            return _reader.GetDataTable();
         }
     }
 }
