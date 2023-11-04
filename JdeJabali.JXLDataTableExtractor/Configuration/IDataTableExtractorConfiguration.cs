@@ -1,5 +1,6 @@
 ﻿using JdeJabali.JXLDataTableExtractor.Exceptions;
 using System;
+using System.Collections.Generic;
 
 namespace JdeJabali.JXLDataTableExtractor.Configuration
 {
@@ -21,6 +22,6 @@ namespace JdeJabali.JXLDataTableExtractor.Configuration
         /// <returns></returns>
         /// <exception cref="ArgumentException"/>        
         /// <exception cref="DuplicateWorkbookException"/>
-        IDataTableExtractorWorkbookConfiguration Workbooks(string[] workbooks);
+        IDataTableExtractorWorkbookConfiguration Workbooks(IEnumerable<string> workbooks);
     }
 }

@@ -53,7 +53,7 @@ namespace JdeJabali.JXLDataTableExtractor
             return this;
         }
 
-        public IDataTableExtractorWorkbookConfiguration Workbooks(string[] workbooks)
+        public IDataTableExtractorWorkbookConfiguration Workbooks(IEnumerable<string> workbooks)
         {
             if (workbooks is null)
             {
